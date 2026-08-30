@@ -15,7 +15,7 @@
 输出格式
 输出一个长度为 6 的字符串，表示小猫的名字。
 */
-/*
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]){
 
     return 0;
 }
-*/
+
 /*
 问题描述
 小蓝最近在为自己的账号设计一个安全密码。他有一套特殊的密码生成规
@@ -55,5 +55,91 @@ A（All）：取该单词的全部字母
 输出格式
 输出一行字符串，表示最终生成的密码。
 */
-
+/*
 #include <stdio.h>
+#include <string.h>
+
+int main(void){
+    int n,L;
+    scanf("%d %d" ,&n ,&L);
+
+    int i;
+    char words[100][20]={0};
+    for(i=0;i<n;i++){
+        scanf("%s",words[i]); 
+    }
+
+    char pswd[100]={0};
+    scanf("%s",pswd);
+
+    char res[1001]={0};
+    for(i=0;i<n;i++){
+        switch(pswd[i]){
+            case 'F':
+                res[strlen(res)] = words[i][0];
+                break;
+            case 'B':
+                res[strlen(res)] = words[i][ strlen(words[i]) - 1 ];
+                break;
+            case 'A':
+                strcat(res,words[i]);
+                break;
+        }
+    }
+    if(strlen(res)>L){
+        res[L] = '\0';
+    }
+    printf("%s",res);
+
+    return 0;
+}
+*/
+/*
+问题描述
+小蓝最近收到了一封神秘密码信，信中有 n 行文字，每行是一个句子。
+小蓝发现，将每行句子的第一个单词的首字母和最后一个单词的首字母
+按顺序拼接起来，就能得到隐藏的密文。
+具体来说，每行句子由若干个单词组成，单词之间用空格分隔。对于每
+行句子，取出：
+该行第一个单词的首字母
+该行最后一个单词的首字母
+将这 2n 个字母按顺序拼接，就得到密文。
+
+输入格式
+第一行一个整数 n，表示句子行数。(1≤n≤100)
+接下来 n 行，每行一个句子。每个句子由若干个仅由小写字母构成的
+单词组成，单词之间用单个空格分隔，每行长度不超过 100。保证每行
+至少有一个单词。
+
+输出格式
+输出一个字符串，表示解码后的密文。
+*/
+/*
+#include <stdio.h>
+#include <string.h>
+
+int main(void){
+    int n;
+    scanf("%d", &n);
+    getchar();  // 吃掉 scanf 残留的换行符
+
+    int i;
+    char str[101]={0};
+    char res[201]={0};
+    for(i=0;i<n;i++){
+        fgets(str, 101, stdin);          // 读整行（含空格）
+        str[ strcspn(str, "\n") ] = '\0'; // 去掉末尾的换行符
+        res[strlen(res)] = str[0];
+        int last_space = -1;
+        int j;
+        for (j = 0; str[j] != '\0'; j++) {
+            if (str[j] == ' ')
+                last_space = j;
+        }
+        res[ strlen(res) ] = str[last_space + 1];
+    }
+    printf("%s",res);
+
+    return 0;
+}
+*/
