@@ -33,8 +33,7 @@ typedef struct {
 } Item;
 
 static int n;
-static int bit[MAXN]; /* 树状数组，下标 1..n，维护"值 >= 当前阈值"的位置集合 */
-
+static int bit[MAXN];
 static void add(int p, int d) {
     for (; p <= n; p += p & (-p)) bit[p] += d;
 }
